@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1078722950286",
+    "firebase_url": "https://praia-de-manoel-viana.firebaseio.com",
+    "project_id": "praia-de-manoel-viana",
+    "storage_bucket": "praia-de-manoel-viana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078722950286:android:ca46e7eeae912444f4c5df",
+        "android_client_info": {
+          "package_name": "com.example.praiademanoelviana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078722950286-sjsgr8fcim3onujn8c588ffcv30gih75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.praiademanoelviana",
+            "certificate_hash": "457149beb0e729323e13a285507401112c443fc0"
+          }
+        },
+        {
+          "client_id": "1078722950286-u81jtilsmtqa4sr7sdg1gja1vlq2i3v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3BIGHpqF-OxIfUHenyNZlraPUhKtI99s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078722950286-u81jtilsmtqa4sr7sdg1gja1vlq2i3v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
