@@ -1,8 +1,5 @@
 package com.example.praiademanoelviana.activity.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.praiademanoelviana.R;
 import com.example.praiademanoelviana.activity.Helper.ConfiruFirebase;
@@ -40,10 +39,11 @@ public class LoginActivity extends AppCompatActivity {
 
    incializaComponentes();
         autenticacao= ConfiruFirebase.getFirebaseAutenticacao();
-        //autenticacao.signOut();
+        autenticacao.signOut();
 
         // METODO VERIFICA USUARIO LOGADO
    vericarUsuarioLogado();
+
 tipoAcesso.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -68,8 +68,9 @@ tipoAcesso.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener
                 String senha = campoSenha.getText().toString();
 
                 if(!email.isEmpty()){
+                    // Verifica estado do swich
                      if (!senha.isEmpty()){
-                               if(tipoAcesso.isClickable()){
+                               if(tipoAcesso.isClickable()){ // cadastro
 autenticacao.createUserWithEmailAndPassword(
         email,senha
 ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -108,13 +109,9 @@ autenticacao.createUserWithEmailAndPassword(
 
         }
     }
-});
-
-
-
-                               }else {// Login
-                                   autenticacao.signInWithEmailAndPassword(
-                                           email, senha
+});                   }else {// Login
+                     autenticacao.signInWithEmailAndPassword(
+                                        email, senha
                                    ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                        @Override
                                        public void onComplete(@NonNull Task<AuthResult> task) {
@@ -139,8 +136,11 @@ autenticacao.createUserWithEmailAndPassword(
 
 
 
+                     }else {
+                         Toast.makeText(LoginActivity.this,
+                                 "Preencha a senha!",
+                                 Toast.LENGTH_SHORT).show();
                      }
-
                 }else {
                     Toast.makeText(LoginActivity.this,
                             "Preencha o E-mail!",
@@ -152,12 +152,6 @@ autenticacao.createUserWithEmailAndPassword(
 
 }
 
-
-private  String getTipoUsuario(){
-return tipoUsuario.isChecked() ? "E" : "U";
-
-
-}
     private  void vericarUsuarioLogado(){
         FirebaseUser usuarioAtual=
                 autenticacao.getCurrentUser();
@@ -169,6 +163,12 @@ return tipoUsuario.isChecked() ? "E" : "U";
 
 
     }
+private  String getTipoUsuario(){
+return tipoUsuario.isChecked() ? "E" : "U";
+
+
+}
+
 private  void abriTelaP(String tipoUsuario){
 if(tipoUsuario.equals("E")){// tipo empresa
 
@@ -188,9 +188,9 @@ private void incializaComponentes() {
 
       campoEmail= findViewById(R.id.editCadastroEmail);
       campoSenha = findViewById(R.id.editSenha);
-      botaoAcessar = findViewById(R.id.buttonAcesso);
+      botaoAcessar = findViewById(R.id.BotaoAcesso);
         tipoAcesso = findViewById(R.id.switchAcesso);
-    tipoUsuario = findViewById(R.id.sTipoAcesso);
+    tipoUsuario = findViewById(R.id.SwitchTipoAcesso);
     linerartipoUsuario = findViewById(R.id.lineartipoUsuario);
     }
 }
