@@ -10,7 +10,7 @@ public class UsuarioFirebase {
 
 
     public static String getIdUsuario() {
-        FirebaseAuth autenticacao = ConfiruFirebase.getFirebaseAutenticacao();
+        FirebaseAuth autenticacao =ConfiruFirebase.getFirebaseAutenticacao();
         return autenticacao.getCurrentUser().getUid();
 
 
@@ -29,11 +29,11 @@ public class UsuarioFirebase {
         try {
             FirebaseUser user = getUsuarioAtual();
             UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(tipo)
-                    .build();
+                    .setDisplayName(tipo).build();
             user.updateProfile(profile);
 
  return  true;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

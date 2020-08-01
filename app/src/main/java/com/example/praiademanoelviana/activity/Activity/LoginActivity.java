@@ -28,8 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
      private Button botaoAcessar;
      private EditText campoSenha,campoEmail;
-     private Switch tipoAcesso,tipoUsuario;
-
+     private Switch tipoacesso,tipousuario;
      private LinearLayout linerartipoUsuario;
     private FirebaseAuth autenticacao;
     @Override
@@ -44,16 +43,12 @@ public class LoginActivity extends AppCompatActivity {
         // METODO VERIFICA USUARIO LOGADO
    vericarUsuarioLogado();
 
-tipoAcesso.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+tipoacesso.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(isChecked){// ad. prefeitura
-
+        if(isChecked){// Faze a Verificação se é uma empresa ou usuario
             linerartipoUsuario.setVisibility(View.VISIBLE);
-
-
-        }else {// usuario normal
-
+        }else {//Usuario
             linerartipoUsuario.setVisibility(View.GONE);
 
         }
@@ -67,13 +62,14 @@ tipoAcesso.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener
                 String email = campoEmail.getText().toString();
                 String senha = campoSenha.getText().toString();
 
-                if(!email.isEmpty()){
-                    // Verifica estado do swich
-                     if (!senha.isEmpty()){
-                               if(tipoAcesso.isClickable()){ // cadastro
-autenticacao.createUserWithEmailAndPassword(
-        email,senha
-).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                if( !email.isEmpty()){
+                     if ( !senha.isEmpty()){
+                               // verifica estado do swicht
+                               if(tipoacesso.isClickable()){ // cadastro
+                                   // cria novo usuario com crate User
+                                autenticacao.createUserWithEmailAndPassword(email, senha
+                              ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
     @Override
     public void onComplete(@NonNull Task<AuthResult> task) {
         if(task.isSuccessful()){
@@ -93,9 +89,9 @@ autenticacao.createUserWithEmailAndPassword(
                 throw task.getException();
             }catch (FirebaseAuthWeakPasswordException e){
                 erroExcecao = "Digite uma senha mais forte!";
-            }catch (FirebaseAuthInvalidCredentialsException e){
+            }catch (FirebaseAuthInvalidCredentialsException  e){
                 erroExcecao = "Por favor, digite um e-mail válido";
-            }catch (FirebaseAuthUserCollisionException e){
+            }catch (FirebaseAuthUserCollisionException  e){
                 erroExcecao = "Este conta já foi cadastrada";
 
             } catch (Exception e) {
@@ -164,33 +160,26 @@ autenticacao.createUserWithEmailAndPassword(
 
     }
 private  String getTipoUsuario(){
-return tipoUsuario.isChecked() ? "E" : "U";
+return tipousuario.isChecked() ? "E" : "U";
 
 
 }
 
-private  void abriTelaP(String tipoUsuario){
+    private  void abriTelaP(String tipoUsuario){
 if(tipoUsuario.equals("E")){// tipo empresa
-
     startActivity(new Intent(getApplicationContext(), EmpresaActivity.class));
-
-
-
 }else{// tipo usuario
     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-
-
-
-
 }
     }
 private void incializaComponentes() {
 
-      campoEmail= findViewById(R.id.editCadastroEmail);
-      campoSenha = findViewById(R.id.editSenha);
+      campoEmail= findViewById(R.id.CampoEmail);
+      campoSenha = findViewById(R.id.CampoSenha);
       botaoAcessar = findViewById(R.id.BotaoAcesso);
-        tipoAcesso = findViewById(R.id.switchAcesso);
-    tipoUsuario = findViewById(R.id.SwitchTipoAcesso);
+
+        tipoacesso = findViewById(R.id.switchAcesso);
+    tipousuario = findViewById(R.id.SwitchTipoAcesso);
     linerartipoUsuario = findViewById(R.id.lineartipoUsuario);
     }
 }
