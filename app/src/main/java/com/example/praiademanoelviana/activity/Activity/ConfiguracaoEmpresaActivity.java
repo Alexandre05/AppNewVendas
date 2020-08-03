@@ -179,7 +179,7 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
                     byte[] dadosImagem = baos.toByteArray();
 
                     final StorageReference imagemRef = storageReference
-                            .child("imagens")
+                            .child("imagens perfil ")
                             .child("empresas")
                             .child(idUsuarioLogado + "jpeg");
 
@@ -224,11 +224,11 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
 
     private  void inicializarComponentes(){
 
-edtEmpresaNome = findViewById(R.id.editENome);
+edtEmpresaNome = findViewById(R.id.InformaAcamp);
 edtRamoEmpre = findViewById(R.id.editEmpresaRamo);
-edtInformaEmpresa = findViewById(R.id.editEInformacoes);
+edtInformaEmpresa = findViewById(R.id.InformacoesEmpre);
 edtValor= findViewById(R.id.editValorE);
-imagePerfilEmpresa= findViewById(R.id.imagePerfilEmpresa);
+imagePerfilEmpresa= findViewById(R.id.FotoEmpresa);
 
     }
 }

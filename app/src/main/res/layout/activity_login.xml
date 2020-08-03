@@ -87,7 +87,7 @@
              />
 
         <Switch
-            android:id="@+id/SwitchTipoAcesso"
+            android:id="@+id/SwitchTipoUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

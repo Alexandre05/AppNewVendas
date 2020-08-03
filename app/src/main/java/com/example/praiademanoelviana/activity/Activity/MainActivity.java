@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-              abrirLogin();
+              abrir();
             }
         }, 3000);
     }
-    private  void abrirLogin(){
+    private  void abrir(){
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);

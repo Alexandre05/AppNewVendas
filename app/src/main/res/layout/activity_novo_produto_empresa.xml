@@ -13,5 +13,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/FotoP"
+            android:layout_width="304dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/acampamento" />
+
+        <EditText
+            android:id="@+id/NomeArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:background="@drawable/bg_edtex"
+            android:ems="10"
+            android:hint="Nome Área"
+            android:inputType="text"
+            android:padding="16dp" />
+
+        <EditText
+            android:id="@+id/InformaAcamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edtex"
+            android:ems="10"
+            android:hint="Informações"
+            android:inputType="text"
+            android:padding="16dp" />
+        <EditText
+            android:id="@+id/Valorarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:background="@drawable/bg_edtex"
+            android:ems="10"
+            android:hint="Valor da  Área"
+            android:inputType="text"
+            android:padding="16dp" />
+        <Button
+            android:id="@+id/buttonAcessar2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ValidarDadosCAM"
+            android:padding="16dp"
+            android:text="Salvar"
+            android:textColor="#33351D"
+            android:theme="@style/botao" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
