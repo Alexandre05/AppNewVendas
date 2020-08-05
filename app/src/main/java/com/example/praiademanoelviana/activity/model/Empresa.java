@@ -3,14 +3,25 @@ package com.example.praiademanoelviana.activity.model;
 import com.example.praiademanoelviana.activity.Helper.ConfiruFirebase;
 import com.google.firebase.database.DatabaseReference;
 
-public class Empresa {
+import java.io.Serializable;
+
+public class Empresa implements Serializable {
 
     private String idUsuario;
     private String urlImagem;
     private String nome;
+    private String nome_filtro;
     private String informacoes;
     private String ramo;
     private Double valor;
+
+    public String getNome_filtro() {
+        return nome_filtro;
+    }
+
+    public void setNome_filtro(String nome_filtro) {
+        this.nome_filtro = nome_filtro;
+    }
 
     public Empresa() {
     }
@@ -44,7 +55,7 @@ DatabaseReference empresaRef = firebaseRef.child("empresas")
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toLowerCase();
     }
 
     public String getInformacoes() {

@@ -13,14 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.praiademanoelviana.R;
 import com.example.praiademanoelviana.activity.model.Produto;
-
+import com.squareup.picasso.Picasso;
 import java.util.List;
-
-
-
-/**
- * Created by Jamilton
- */
 
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHolder>{
 
@@ -35,6 +29,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+
         View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_produto, parent, false);
         return new MyViewHolder(itemLista);
     }
@@ -45,7 +40,13 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
         holder.nome.setText(produto.getNomePro());
         holder.informacao.setText(produto.getInformaAcamp());
         holder.valor.setText("R$ " + produto.getValorAreaAcampa());
+        //Carregar imagem
+
+        String urlImagem = produto.getUrlImagemproduto();
+        Picasso.get().load( urlImagem ).into( holder.foto );
         //holder.FotoA.setImageBitmap(produto.getUrlImagemproduto());
+
+
     }
 
     @Override

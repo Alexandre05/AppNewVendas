@@ -45,48 +45,50 @@ public class EmpresaActivity extends AppCompatActivity {
         // configurações iniciais
         inicializarComponentes();
         autenticacao = ConfiruFirebase.getFirebaseAutenticacao();
-          firebaseRef = ConfiruFirebase.getFirebase();
-idUsuarioLogado= UsuarioFirebase.getIdUsuario();
+        firebaseRef = ConfiruFirebase.getFirebase();
+        idUsuarioLogado = UsuarioFirebase.getIdUsuario();
 
         //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
         toolbar.setTitle("Ad. Praia de Manoel Viana");
         setSupportActionBar(toolbar);
-           //configura recycle
-          recycleProdutos.setLayoutManager(new LinearLayoutManager(this));
-          recycleProdutos.setHasFixedSize(true);
-          adapterProduto = new AdapterProduto(produtos,this);
-          recycleProdutos.setAdapter(adapterProduto);
+        //configura recycle
+        recycleProdutos.setLayoutManager(new LinearLayoutManager(this));
+        recycleProdutos.setHasFixedSize(true);
+        adapterProduto = new AdapterProduto(produtos, this);
+        recycleProdutos.setAdapter(adapterProduto);
 
+//Recupera produtos para empresa
+        recuparProdutos();
+        //Adiciona evento de clique no recyclerview
+        recycleProdutos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recycleProdutos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
 
-          recuparProdutos();
-          recycleProdutos.addOnItemTouchListener(
-                  new RecyclerItemClickListener(
-                          this,
-                          recycleProdutos,
-                          new RecyclerItemClickListener.OnItemClickListener() {
-                              @Override
-                              public void onItemClick(View view, int position) {
-                                  Produto produtoSelecionado= produtos.get(position);
-                                  produtoSelecionado.remover();
-                                  Toast.makeText(EmpresaActivity.this,
-                                          "Produto Removido",
-                                          Toast.LENGTH_SHORT).show();
-                              }
+                            }
 
-                              @Override
-                              public void onLongItemClick(View view, int position) {
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Produto produtoSelecionado= produtos.get(position);
+                                produtoSelecionado.remover();
+                                Toast.makeText(EmpresaActivity.this,
+                                        "Produto Removido",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                              }
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                              @Override
-                              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
+                        }
+                )
 
-                              }
-                          }
-                  )
+        );
 
-          );
     }
     private  void recuparProdutos(){
 
@@ -114,7 +116,7 @@ produtosRef.addValueEventListener(new ValueEventListener() {
 });
     }
    private void inicializarComponentes(){
-recycleProdutos= findViewById(R.id.recycleProdutos);
+recycleProdutos= findViewById(R.id.recyclePro);
 
 
 
