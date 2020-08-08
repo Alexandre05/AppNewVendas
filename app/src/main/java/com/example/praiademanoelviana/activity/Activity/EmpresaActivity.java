@@ -50,7 +50,7 @@ public class EmpresaActivity extends AppCompatActivity {
 
         //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
-        toolbar.setTitle("Ad. Praia de Manoel Viana");
+        toolbar.setTitle("Gerência");
         setSupportActionBar(toolbar);
         //configura recycle
         recycleProdutos.setLayoutManager(new LinearLayoutManager(this));
@@ -143,6 +143,9 @@ recycleProdutos= findViewById(R.id.recyclePro);
             case R.id.menuNovoProduto :
                 abrirNovoProduto();
                 break;
+            case R.id.menuPedidos :
+                abrirPedidos();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -156,6 +159,10 @@ recycleProdutos= findViewById(R.id.recyclePro);
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void abrirPedidos(){
+        startActivity(new Intent(EmpresaActivity.this, PedidosActivity.class));
     }
 
     private void abrirConfiguracoes(){

@@ -51,7 +51,7 @@ public class NovoProdutoEmpresaActivity extends AppCompatActivity {
         storageReference= ConfiruFirebase.getReferenciaStorage();
         //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
-        toolbar.setTitle("Nova Informação/Foto");
+        toolbar.setTitle("Novo Produto/Serviço");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         imageAcampa.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +69,7 @@ public class NovoProdutoEmpresaActivity extends AppCompatActivity {
             }
         });
         recuperarDadoProdutos();
+
     }
     private void recuperarDadoProdutos(){
 
@@ -81,7 +82,7 @@ public class NovoProdutoEmpresaActivity extends AppCompatActivity {
 
                 if( dataSnapshot.getValue() != null ){
                     Produto produto = dataSnapshot.getValue(Produto.class);
-                    nomeAr.setText(produto.getNomePro());
+                    nomeAr.setText(produto.getNome());
                     informaAre.setText(produto.getInformaAcamp());
                     //edtValor.setText(empresa.getValor().toString());
                     //edtInformaEmpresa.setText(empresa.getInformacoes());
@@ -119,8 +120,8 @@ public class NovoProdutoEmpresaActivity extends AppCompatActivity {
 
                         Produto produto = new Produto();
                         produto.setIdUsuario( idUsuarioLogado );
-                        produto.setNomePro( nome );
-                        produto.setValorAreaAcampa( Double.parseDouble(valor));
+                        produto.setNome( nome );
+                        produto.setPreco( Double.parseDouble(valor));
                         //empresa.setRamo(ramo);
                         produto.setInformaAcamp( informacoes );
                         produto.setUrlImagemproduto(urlImagemPro );
@@ -219,7 +220,7 @@ public class NovoProdutoEmpresaActivity extends AppCompatActivity {
     private  void inicializarComponentes(){
         nomeAr = findViewById(R.id.NomeArea);
         informaAre = findViewById(R.id.InformaAcamp);
-          Valor=findViewById(R.id.Valorarea);
+          Valor=findViewById(R.id.ValorProduto);
         imageAcampa= findViewById(R.id.FotoP);
 
     }

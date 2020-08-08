@@ -33,23 +33,27 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 
 public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
-    private EditText edtEmpresaNome, edtRamoEmpre, edtInformaEmpresa, edtValor;
+    private EditText editEmpresaNome, editEmpresaCategoria,
+            editEmpresaTempo, editEmpresaTaxa;
     private ImageView imagePerfilEmpresa;
-    private DatabaseReference firebaseRef;
-    private static final int SELECAO_GALEREIA = 200;
+
+    private static final int SELECAO_GALERIA = 200;
     private StorageReference storageReference;
+    private DatabaseReference firebaseRef;
     private String idUsuarioLogado;
-    private String urlImagemSelecionada = "";
+    private String urlImagemSelecionada ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracao);
-// configuração componentes
+//Configurações iniciais
         inicializarComponentes();
-        storageReference= ConfiruFirebase.getReferenciaStorage();
+        storageReference = ConfiruFirebase.getReferenciaStorage();
         firebaseRef = ConfiruFirebase.getFirebase();
-        idUsuarioLogado= UsuarioFirebase.getIdUsuario();
+        idUsuarioLogado = UsuarioFirebase.getIdUsuario();
+
+        //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
         toolbar.setTitle("Configurações");
         setSupportActionBar(toolbar);
@@ -58,37 +62,38 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
         imagePerfilEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 );
-
-                if (i.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(i, SELECAO_GALEREIA);
-
-
+                if( i.resolveActivity(getPackageManager()) != null ){
+                    startActivityForResult(i, SELECAO_GALERIA);
                 }
             }
         });
+
         /*Recuperar dados da empresa*/
         recuperarDadosEmpresa();
-    }
 
+
+    }
 
     private void recuperarDadosEmpresa(){
 
         DatabaseReference empresaRef = firebaseRef
                 .child("empresas")
                 .child( idUsuarioLogado );
+
         empresaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if( dataSnapshot.getValue() != null ){
                     Empresa empresa = dataSnapshot.getValue(Empresa.class);
-                    edtEmpresaNome.setText(empresa.getNome());
-                    edtRamoEmpre.setText(empresa.getRamo());
-                    edtValor.setText(empresa.getValor().toString());
-                    edtInformaEmpresa.setText(empresa.getInformacoes());
+                    editEmpresaNome.setText(empresa.getNome());
+                    editEmpresaCategoria.setText(empresa.getCategoria());
+                    editEmpresaTaxa.setText(empresa.getPrecoEntrega().toString());
+                    editEmpresaTempo.setText(empresa.getTempo());
 
                     urlImagemSelecionada = empresa.getUrlImagem();
                     if( urlImagemSelecionada != "" ){
@@ -112,55 +117,57 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
     public void validarDadosEmpresa(View view){
 
         //Valida se os campos foram preenchidos
-        String nome = edtEmpresaNome.getText().toString();
-        String valor = edtValor.getText().toString();
-        String informacoes = edtInformaEmpresa.getText().toString();
-        String ramo = edtRamoEmpre.getText().toString();
+        String nome = editEmpresaNome.getText().toString();
+        String taxa = editEmpresaTaxa.getText().toString();
+        String categoria = editEmpresaCategoria.getText().toString();
+        String tempo = editEmpresaTempo.getText().toString();
 
         if( !nome.isEmpty()){
-            if( !valor.isEmpty()){
-                if( !ramo.isEmpty()){
-                    if( !valor.isEmpty()){
+            if( !taxa.isEmpty()){
+                if( !categoria.isEmpty()){
+                    if( !tempo.isEmpty()){
 
                         Empresa empresa = new Empresa();
                         empresa.setIdUsuario( idUsuarioLogado );
                         empresa.setNome( nome );
-                        empresa.setValor( Double.parseDouble(valor) );
-                        empresa.setRamo(ramo);
-                        empresa.setInformacoes( informacoes );
+                        empresa.setPrecoEntrega( Double.parseDouble(taxa) );
+                        empresa.setCategoria(categoria);
+                        empresa.setTempo( tempo );
                         empresa.setUrlImagem( urlImagemSelecionada );
                         empresa.salvar();
                         finish();
 
                     }else{
-       exibirMensagem("Digite Informações");
+                        exibirMensagem("Digite um tempo de entrega");
                     }
                 }else{
-      exibirMensagem("Digite Ramo");
+                    exibirMensagem("Digite uma categoria");
                 }
             }else{
-                exibirMensagem("Digite valor ");
+                exibirMensagem("Digite uma taxa de entrega");
             }
         }else{
             exibirMensagem("Digite um nome para a empresa");
         }
 
     }
-    private void exibirMensagem(String texto) {
+
+    private void exibirMensagem(String texto){
         Toast.makeText(this, texto, Toast.LENGTH_SHORT)
                 .show();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if( resultCode == RESULT_OK){
             Bitmap imagem = null;
 
             try {
 
                 switch (requestCode) {
-                    case SELECAO_GALEREIA:
+                    case SELECAO_GALERIA:
                         Uri localImagem = data.getData();
                         imagem = MediaStore.Images
                                 .Media
@@ -171,19 +178,20 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
                         break;
                 }
 
-                if (imagem != null) {
+                if( imagem != null){
 
-                    imagePerfilEmpresa.setImageBitmap(imagem);
+                    imagePerfilEmpresa.setImageBitmap( imagem );
+
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos);
                     byte[] dadosImagem = baos.toByteArray();
 
-                    final StorageReference imagemRef = storageReference
-                            .child("imagens perfil ")
+                    StorageReference imagemRef = storageReference
+                            .child("imagens")
                             .child("empresas")
                             .child(idUsuarioLogado + "jpeg");
 
-                    UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+                    UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -199,18 +207,13 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
                             Toast.makeText(ConfiguracaoEmpresaActivity.this,
                                     "Sucesso ao fazer upload da imagem",
                                     Toast.LENGTH_SHORT).show();
-                               imagemRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                   @Override
-                                   public void onComplete(@NonNull Task<Uri> task) {
-                                     Uri url= task.getResult();
-                                   }
-                               });
+
                         }
                     });
 
                 }
 
-            } catch (Exception e) {
+            }catch (Exception e){
                 e.printStackTrace();
             }
 
@@ -218,17 +221,12 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-    private  void inicializarComponentes(){
-
-edtEmpresaNome = findViewById(R.id.InformaAcamp);
-edtRamoEmpre = findViewById(R.id.editEmpresaRamo);
-edtInformaEmpresa = findViewById(R.id.InformacoesEmpre);
-edtValor= findViewById(R.id.editValorE);
-imagePerfilEmpresa= findViewById(R.id.FotoEmpresa);
-
+    private void inicializarComponentes(){
+        editEmpresaNome = findViewById(R.id.editEmpresaNome);
+        editEmpresaCategoria = findViewById(R.id.editEmpresaCategoria);
+        editEmpresaTaxa = findViewById(R.id.editEmpresaTaxa);
+        editEmpresaTempo = findViewById(R.id.editEmpresaTempo);
+        imagePerfilEmpresa = findViewById(R.id.FotoEmpresa);
     }
+
 }

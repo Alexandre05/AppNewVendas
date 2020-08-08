@@ -27,7 +27,7 @@
             android:src="@drawable/perfil" />
 
         <EditText
-            android:id="@+id/InformaAcamp"
+            android:id="@+id/editEmpresaNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-2dp"
@@ -38,32 +38,32 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/editEmpresaRamo"
+            android:id="@+id/editEmpresaCategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edtex"
             android:ems="10"
-            android:hint="Ramo"
+            android:hint="Categoria"
             android:inputType="text"
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/InformacoesEmpre"
+            android:id="@+id/editEmpresaTaxa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edtex"
             android:ems="10"
-            android:hint="Informações"
+            android:hint="Taxa de Entrega"
             android:inputType="text"
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/editValorE"
+            android:id="@+id/editEmpresaTempo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edtex"
             android:ems="10"
-            android:hint="Valor"
+            android:hint="Tempo de Entrega"
             android:inputType="numberDecimal"
             android:padding="16dp" />
 

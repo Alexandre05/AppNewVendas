@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Activity.CartapioActivity"
-            android:parentActivityName=".activity.Activity.HomeActivity">
-        </activity>
-        <activity android:name=".activity.Activity.TelaActivity"></activity>
+        <activity android:name=".activity.Activity.PedidosActivity"
+            android:parentActivityName=".activity.Activity.EmpresaActivity"></activity>
+        <activity
+            android:name=".activity.Activity.CartapioActivity"
+            android:parentActivityName=".activity.Activity.HomeActivity"></activity>
+        <activity android:name=".activity.Activity.TelaActivity" />
         <activity
             android:name=".activity.Activity.ConfiguracoesUsuariosActivity"
             android:parentActivityName=".activity.Activity.HomeActivity" />

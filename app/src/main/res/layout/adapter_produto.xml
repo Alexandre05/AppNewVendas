@@ -35,12 +35,12 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TextValorArea"
+                android:id="@+id/ValorProduto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:inputType="numberDecimal"
-                android:text="Valor Àrea"
+                android:text="Valor Produto"
                 android:textSize="14sp" />
 
             <LinearLayout

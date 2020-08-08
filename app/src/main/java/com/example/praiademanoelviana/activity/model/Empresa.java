@@ -10,30 +10,22 @@ public class Empresa implements Serializable {
     private String idUsuario;
     private String urlImagem;
     private String nome;
-    private String nome_filtro;
-    private String informacoes;
-    private String ramo;
-    private Double valor;
-
-    public String getNome_filtro() {
-        return nome_filtro;
-    }
-
-    public void setNome_filtro(String nome_filtro) {
-        this.nome_filtro = nome_filtro;
-    }
+    private String tempo;
+    private String categoria;
+    private Double precoEntrega;
 
     public Empresa() {
     }
-    public  void salvar(){
-        DatabaseReference firebaseRef =
-                ConfiruFirebase.getFirebase();
 
-DatabaseReference empresaRef = firebaseRef.child("empresas")
-        .child(getIdUsuario());
-   empresaRef.setValue(this);
+    public void salvar(){
+
+        DatabaseReference firebaseRef = ConfiruFirebase.getFirebase();
+        DatabaseReference empresaRef = firebaseRef.child("empresas")
+                .child( getIdUsuario() );
+        empresaRef.setValue(this);
 
     }
+
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -55,30 +47,30 @@ DatabaseReference empresaRef = firebaseRef.child("empresas")
     }
 
     public void setNome(String nome) {
-        this.nome = nome.toLowerCase();
+        this.nome = nome;
     }
 
-    public String getInformacoes() {
-        return informacoes;
+    public String getTempo() {
+        return tempo;
     }
 
-    public void setInformacoes(String informacoes) {
-        this.informacoes = informacoes;
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
     }
 
-    public String getRamo() {
-        return ramo;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setRamo(String ramo) {
-        this.ramo = ramo;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public Double getValor() {
-        return valor;
+    public Double getPrecoEntrega() {
+        return precoEntrega;
     }
 
-    public void setValor(Double valor) {
-        this.valor = valor;
+    public void setPrecoEntrega(Double precoEntrega) {
+        this.precoEntrega = precoEntrega;
     }
 }

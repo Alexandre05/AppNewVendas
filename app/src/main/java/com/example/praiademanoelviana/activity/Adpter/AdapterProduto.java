@@ -37,9 +37,9 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
         Produto produto = produtos.get(i);
-        holder.nome.setText(produto.getNomePro());
+        holder.nome.setText(produto.getNome());
         holder.informacao.setText(produto.getInformaAcamp());
-        holder.valor.setText("R$ " + produto.getValorAreaAcampa());
+        holder.valor.setText("R$ " + produto.getPreco());
         //Carregar imagem
 
         String urlImagem = produto.getUrlImagemproduto();
@@ -65,7 +65,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.MyViewHo
             foto = itemView.findViewById(R.id.ImageProduto);
             nome = itemView.findViewById(R.id.TextNomeProduto);
             informacao = itemView.findViewById(R.id.TextInfomacao);
-            valor= itemView.findViewById(R.id.TextValorArea);
+            valor= itemView.findViewById(R.id.ValorProduto);
         }
     }
 }
