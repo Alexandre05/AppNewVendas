@@ -60,6 +60,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
         TextView tempo;
         TextView entrega;
 
+
         public MyViewHolder(View itemView) {
             super(itemView);
 

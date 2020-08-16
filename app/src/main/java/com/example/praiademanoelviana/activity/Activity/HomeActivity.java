@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
-        toolbar.setTitle(" Praia e Camping Rainha do Sol");
+        toolbar.setTitle("Listas de Empresas");
         setSupportActionBar(toolbar);
         //configura recycle
         recyclerEmpresa.setLayoutManager(new LinearLayoutManager(this));

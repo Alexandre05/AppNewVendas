@@ -22,7 +22,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/FotoP"
-            android:layout_width="257dp"
+            android:layout_width="141dp"
             android:layout_height="97dp"
             android:layout_gravity="center"
             android:paddingTop="10dp"
@@ -66,8 +66,10 @@
             android:onClick="ValidarDadosCAM"
             android:padding="16dp"
             android:text="Salvar"
-            android:textColor="#33351D"
+            android:textColor="#ffff"
             android:theme="@style/botao" />
+
+
 
     </LinearLayout>
 

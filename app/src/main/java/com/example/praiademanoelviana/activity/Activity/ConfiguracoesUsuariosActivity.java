@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 public class ConfiguracoesUsuariosActivity extends AppCompatActivity {
-    private EditText edtNomeUsuario,
+    private EditText edtNomeUsuario,edttelefone,
             edtCpfUsuario, edtEnderecoUsuario;
     private  String idUsuario;
     private ImageView imageUsuario;
@@ -40,7 +40,7 @@ public class ConfiguracoesUsuariosActivity extends AppCompatActivity {
         firebaseRef = ConfiruFirebase.getFirebase();
 
 
-        toolbar.setTitle("Configurações Usuário");
+        toolbar.setTitle(" Perfil");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -58,6 +58,7 @@ Usuario usuario = dataSnapshot.getValue(Usuario.class);
 edtNomeUsuario.setText(usuario.getNome());
 edtEnderecoUsuario.setText(usuario.getEndereco());
 edtCpfUsuario.setText(usuario.getCpf());
+edttelefone.setText(usuario.getTelefoneUsuario());
         }
     }
 
@@ -74,6 +75,7 @@ edtCpfUsuario.setText(usuario.getCpf());
         String nome = edtNomeUsuario.getText().toString();
         String endereco = edtEnderecoUsuario.getText().toString();
         String cpf = edtCpfUsuario.getText().toString();
+        String ttelefone = edttelefone.getText().toString();
 
         if( !nome.isEmpty()) {
             if (!endereco.isEmpty()) {
@@ -85,6 +87,7 @@ edtCpfUsuario.setText(usuario.getCpf());
                         usuario.setNome(nome);
                         usuario.setEndereco((endereco));
                         usuario.setCpf(cpf);
+                        usuario.setTelefoneUsuario(ttelefone);
                         //empresa.setInformacoes(informacoes);
                         //usuario.setUrlImagemUsuario(urlIm);
                         usuario.salvar();
@@ -113,7 +116,7 @@ edtCpfUsuario.setText(usuario.getCpf());
         edtNomeUsuario= findViewById(R.id.NomeUsuario);
         edtCpfUsuario=findViewById(R.id.CpfUsuario);
         edtEnderecoUsuario = findViewById(R.id.editEnderecoUsuario);
-
+    edttelefone=findViewById(R.id.editTelefoneUsuario);
 
 
     }

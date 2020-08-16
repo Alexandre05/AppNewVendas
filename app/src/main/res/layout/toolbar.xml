@@ -7,7 +7,7 @@
         android:id="@+id/toolbarNova"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#ffff"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 

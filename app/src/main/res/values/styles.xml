@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->e
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">#ffff</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#000080</item>
     </style>
      <style name="botao" parent="Theme.AppCompat.Light">
 <item name="colorControlHighlight">#a394d1</item>
-         <item name="colorButtonNormal">@color/colorAccent</item>
-         <item name="android:textColor">@android:color/white</item>
+         <item name="colorButtonNormal">#00008b</item>
+         <item name="android:textColor">#ffff</item>
      </style>
 </resources>

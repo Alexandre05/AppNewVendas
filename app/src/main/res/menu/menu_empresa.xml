@@ -14,7 +14,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/menuConfigurações"
-        android:title="Configurações"
+        android:title="Edite Seu Perfil"
         app:showAsAction="never" />
     <item
         android:id="@+id/menuSair"

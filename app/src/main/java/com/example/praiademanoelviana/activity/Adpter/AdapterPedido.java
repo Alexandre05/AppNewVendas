@@ -46,6 +46,8 @@ public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHold
         holder.nome.setText( pedido.getNome() );
         holder.endereco.setText( "Endereço: "+pedido.getEndereco() );
         holder.observacao.setText( "Obs: "+ pedido.getObservacao() );
+        holder.telefone.setText("Telefone"+pedido.getTelefoneUsuario());
+
 
         List<ItemPedido> itens = new ArrayList<>();
         itens = pedido.getItens();
@@ -84,6 +86,7 @@ public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHold
         TextView pgto;
         TextView observacao;
         TextView itens;
+        TextView telefone;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -93,6 +96,7 @@ public class AdapterPedido extends RecyclerView.Adapter<AdapterPedido.MyViewHold
             pgto        = itemView.findViewById(R.id.textPedidoPgto);
             observacao  = itemView.findViewById(R.id.textPedidoObs);
             itens       = itemView.findViewById(R.id.textPedidoItens);
+            telefone =itemView.findViewById(R.id.TelefoneContato);
         }
     }
 

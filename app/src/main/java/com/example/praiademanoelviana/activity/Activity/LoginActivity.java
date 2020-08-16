@@ -168,7 +168,8 @@ public class LoginActivity extends AppCompatActivity {
         if(tipoUsuario.equals("E")){//empresa
             startActivity(new Intent(getApplicationContext(), EmpresaActivity.class));
         }else{//usuario
-            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            startActivity(new Intent(getApplicationContext(), TelaActivity.class));
+
         }
     }
 

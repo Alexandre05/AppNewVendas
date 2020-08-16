@@ -12,6 +12,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.praiademanoelviana.R;
@@ -33,16 +36,17 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 
 public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
-    private EditText editEmpresaNome, editEmpresaCategoria,
+    private EditText editEmpresaNome, tefe,cnpj,
             editEmpresaTempo, editEmpresaTaxa;
     private ImageView imagePerfilEmpresa;
-
+  private TextView categoria;
     private static final int SELECAO_GALERIA = 200;
     private StorageReference storageReference;
     private DatabaseReference firebaseRef;
     private String idUsuarioLogado;
     private String urlImagemSelecionada ;
-
+    private RadioButton mercado,loja;
+    private RadioGroup opcaoCate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +59,7 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
 
         //Configurações Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarNova);
-        toolbar.setTitle("Configurações");
+        toolbar.setTitle("Perfil");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -74,7 +78,7 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
 
         /*Recuperar dados da empresa*/
         recuperarDadosEmpresa();
-
+  EscoleCategoria();
 
     }
 
@@ -91,10 +95,11 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
                 if( dataSnapshot.getValue() != null ){
                     Empresa empresa = dataSnapshot.getValue(Empresa.class);
                     editEmpresaNome.setText(empresa.getNome());
-                    editEmpresaCategoria.setText(empresa.getCategoria());
+                    categoria.setText(empresa.getCategoria());
                     editEmpresaTaxa.setText(empresa.getPrecoEntrega().toString());
                     editEmpresaTempo.setText(empresa.getTempo());
-
+                     cnpj.setText(empresa.getCnpj());
+                     tefe.setText(empresa.getTefoneEmpresa());
                     urlImagemSelecionada = empresa.getUrlImagem();
                     if( urlImagemSelecionada != "" ){
                         Picasso.get()
@@ -113,43 +118,62 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
         });
 
     }
+    public  void EscoleCategoria(){
 
+     opcaoCate.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+         @Override
+         public void onCheckedChanged(RadioGroup group, int checkedId) {
+             if(checkedId== R.id.mercado){
+                 categoria.setText("Mercado");
+             }else if(checkedId==R.id.lojaDeRoupa){
+                 categoria.setText("Loja de Roupas");
+
+             }
+         }
+     });
+
+
+
+    }
     public void validarDadosEmpresa(View view){
 
         //Valida se os campos foram preenchidos
         String nome = editEmpresaNome.getText().toString();
         String taxa = editEmpresaTaxa.getText().toString();
-        String categoria = editEmpresaCategoria.getText().toString();
+        String Categoria = categoria.getText().toString();
         String tempo = editEmpresaTempo.getText().toString();
+        String cnpf = cnpj.getText().toString();
+        String tele= tefe.getText().toString();
 
         if( !nome.isEmpty()){
             if( !taxa.isEmpty()){
-                if( !categoria.isEmpty()){
-                    if( !tempo.isEmpty()){
+
+                    if( !cnpf.isEmpty()){
 
                         Empresa empresa = new Empresa();
                         empresa.setIdUsuario( idUsuarioLogado );
                         empresa.setNome( nome );
                         empresa.setPrecoEntrega( Double.parseDouble(taxa) );
-                        empresa.setCategoria(categoria);
+                        empresa.setCategoria(Categoria);
                         empresa.setTempo( tempo );
+                        empresa.setCnpj(cnpf);
+                        empresa.setTefoneEmpresa(tele);
                         empresa.setUrlImagem( urlImagemSelecionada );
+
                         empresa.salvar();
                         finish();
 
                     }else{
-                        exibirMensagem("Digite um tempo de entrega");
+                        exibirMensagem("Digite a Taxa de Entrega");
                     }
-                }else{
-                    exibirMensagem("Digite uma categoria");
-                }
+
             }else{
-                exibirMensagem("Digite uma taxa de entrega");
+                exibirMensagem("Digite Cnpj");
             }
         }else{
             exibirMensagem("Digite um nome para a empresa");
         }
-
+        EscoleCategoria();
     }
 
     private void exibirMensagem(String texto){
@@ -220,13 +244,20 @@ public class ConfiguracaoEmpresaActivity extends AppCompatActivity {
         }
 
     }
+// inicia os componentes
 
     private void inicializarComponentes(){
         editEmpresaNome = findViewById(R.id.editEmpresaNome);
-        editEmpresaCategoria = findViewById(R.id.editEmpresaCategoria);
+        mercado = findViewById(R.id.mercado);
+        loja= findViewById(R.id.lojaDeRoupa);
+
         editEmpresaTaxa = findViewById(R.id.editEmpresaTaxa);
         editEmpresaTempo = findViewById(R.id.editEmpresaTempo);
         imagePerfilEmpresa = findViewById(R.id.FotoEmpresa);
+        opcaoCate = findViewById(R.id.opcaoCategoria);
+        categoria = findViewById(R.id.Cate);
+        tefe= findViewById(R.id.tefenoEmpresa);
+        cnpj= findViewById(R.id.Cnpf);
     }
 
 }

@@ -11,6 +11,7 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,18 +57,25 @@
         android:inputType="text"
         android:padding="16dp" />
 
-
-
-    <Button
+        <EditText
+            android:id="@+id/editTelefoneUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edtex"
+            android:ems="10"
+            android:hint="Telefone"
+            android:inputType="text"
+            android:padding="16dp" />
+        <Button
         android:id="@+id/validarDadoUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="validarDadosUsuario"
         android:padding="16dp"
         android:text="Salvar"
-        android:textColor="#33351D"
+        android:textColor="#ffff"
         android:theme="@style/botao" />
 
-</LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

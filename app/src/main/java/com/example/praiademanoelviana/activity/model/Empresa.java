@@ -13,6 +13,9 @@ public class Empresa implements Serializable {
     private String tempo;
     private String categoria;
     private Double precoEntrega;
+    private String Cnpj;
+    private String tefoneEmpresa;
+
 
     public Empresa() {
     }
@@ -24,6 +27,22 @@ public class Empresa implements Serializable {
                 .child( getIdUsuario() );
         empresaRef.setValue(this);
 
+    }
+
+    public String getCnpj() {
+        return Cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        Cnpj = cnpj;
+    }
+
+    public String getTefoneEmpresa() {
+        return tefoneEmpresa;
+    }
+
+    public void setTefoneEmpresa(String tefoneEmpresa) {
+        this.tefoneEmpresa = tefoneEmpresa;
     }
 
     public String getIdUsuario() {

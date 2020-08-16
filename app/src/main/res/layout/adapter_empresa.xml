@@ -43,7 +43,7 @@
                     android:id="@+id/textCategoriaEmpresa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chinesa" />
+                    android:text="Infome Produto" />
 
                 <TextView
                     android:id="@+id/textTempoEmpresa"
