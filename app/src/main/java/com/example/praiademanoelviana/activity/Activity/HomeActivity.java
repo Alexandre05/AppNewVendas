@@ -28,6 +28,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         inicializarComponentes();
         firebaRef= ConfiruFirebase.getFirebase();
-
         autenticacao = ConfiruFirebase.getFirebaseAutenticacao();
 
 
@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //configura recycle
         recyclerEmpresa.setLayoutManager(new LinearLayoutManager(this));
+
         recyclerEmpresa.setHasFixedSize(true);
         adapterEmpresa = new AdapterEmpresa(empresas);
         recyclerEmpresa.setAdapter(adapterEmpresa);
@@ -106,12 +107,14 @@ recyclerEmpresa.addOnItemTouchListener(
 
     private  void pesquisarEmpresas(String pesquisa){
 DatabaseReference empresasRef = firebaRef
+
         .child("empresas");
 
         Query query = empresasRef.orderByChild("nome")
                 .startAt(pesquisa)
                 .endAt(pesquisa+"\uf8ff");
 query.addListenerForSingleValueEvent(new ValueEventListener() {
+
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         empresas.clear();
@@ -123,6 +126,7 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
         }
         adapterEmpresa.notifyDataSetChanged();
 
+
     }
 
     @Override
@@ -133,13 +137,16 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
     }
     private void recuparEmpresas(){
      DatabaseReference empresaRef = firebaRef.child("empresas");
+
 empresaRef.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         empresas.clear();
+
         for(DataSnapshot ds: dataSnapshot.getChildren()){
 
             empresas.add(ds.getValue(Empresa.class));
+
 
 
         }
