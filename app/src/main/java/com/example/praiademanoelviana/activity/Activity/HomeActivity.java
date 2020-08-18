@@ -136,17 +136,16 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
 });
     }
     private void recuparEmpresas(){
-     DatabaseReference empresaRef = firebaRef.child("empresas");
+     DatabaseReference empresaRef = firebaRef
+             .child("empresas");
 
 empresaRef.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         empresas.clear();
-
         for(DataSnapshot ds: dataSnapshot.getChildren()){
 
             empresas.add(ds.getValue(Empresa.class));
-
 
 
         }
@@ -163,6 +162,7 @@ empresaRef.addValueEventListener(new ValueEventListener() {
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
