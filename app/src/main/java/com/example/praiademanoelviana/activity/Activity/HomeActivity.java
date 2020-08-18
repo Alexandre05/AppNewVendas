@@ -139,6 +139,8 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
      DatabaseReference empresaRef = firebaRef
              .child("empresas");
 
+
+
 empresaRef.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
