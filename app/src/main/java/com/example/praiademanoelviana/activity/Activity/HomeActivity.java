@@ -39,6 +39,8 @@ public class HomeActivity extends AppCompatActivity {
     private List<Empresa> empresas = new ArrayList<>();
     private DatabaseReference  firebaRef;
     private AdapterEmpresa adapterEmpresa;
+    String categoria;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ public class HomeActivity extends AppCompatActivity {
         inicializarComponentes();
         firebaRef= ConfiruFirebase.getFirebase();
         autenticacao = ConfiruFirebase.getFirebaseAutenticacao();
+
+        categoria = getIntent().getStringExtra("Categoria");
 
 
 
@@ -120,8 +124,11 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
         empresas.clear();
         for(DataSnapshot ds: dataSnapshot.getChildren()){
 
-            empresas.add(ds.getValue(Empresa.class));
+            Empresa  e = ds.getValue(Empresa.class);
 
+            if (e.getCategoria().equals(categoria)) {
+                empresas.add(e);
+            }
 
         }
         adapterEmpresa.notifyDataSetChanged();
@@ -147,7 +154,11 @@ empresaRef.addValueEventListener(new ValueEventListener() {
         empresas.clear();
         for(DataSnapshot ds: dataSnapshot.getChildren()){
 
-            empresas.add(ds.getValue(Empresa.class));
+            Empresa  e = ds.getValue(Empresa.class);
+
+            if (e.getCategoria().equals(categoria)) {
+                empresas.add(e);
+            }
 
 
         }
