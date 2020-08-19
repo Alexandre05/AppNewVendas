@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.example.praiademanoelviana.R;
 import com.example.praiademanoelviana.activity.Adpter.AdapterEmpresa;
@@ -49,7 +50,11 @@ public class HomeActivity extends AppCompatActivity {
         firebaRef= ConfiruFirebase.getFirebase();
         autenticacao = ConfiruFirebase.getFirebaseAutenticacao();
 
+
+        /* Recupera a categoria passada na Intent */
         categoria = getIntent().getStringExtra("Categoria");
+
+        Toast.makeText(this, "CATEGORIA >>> " + categoria, Toast.LENGTH_SHORT).show();
 
 
 
@@ -61,8 +66,8 @@ public class HomeActivity extends AppCompatActivity {
         recyclerEmpresa.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerEmpresa.setHasFixedSize(true);
-        adapterEmpresa = new AdapterEmpresa(empresas);
-        recyclerEmpresa.setAdapter(adapterEmpresa);
+//        adapterEmpresa = new AdapterEmpresa(empresas);
+//        recyclerEmpresa.setAdapter(adapterEmpresa);
 
 //Recupera produtos para empresa
         recuparEmpresas();
@@ -126,11 +131,16 @@ query.addListenerForSingleValueEvent(new ValueEventListener() {
 
             Empresa  e = ds.getValue(Empresa.class);
 
+            /* Filtra a empresa por categoria */
             if (e.getCategoria().equals(categoria)) {
                 empresas.add(e);
             }
 
         }
+
+        adapterEmpresa = new AdapterEmpresa(empresas);
+        recyclerEmpresa.setAdapter(adapterEmpresa);
+
         adapterEmpresa.notifyDataSetChanged();
 
 
@@ -156,12 +166,17 @@ empresaRef.addValueEventListener(new ValueEventListener() {
 
             Empresa  e = ds.getValue(Empresa.class);
 
+            /* Filtra a empresa por categoria */
             if (e.getCategoria().equals(categoria)) {
                 empresas.add(e);
             }
 
 
         }
+
+        adapterEmpresa = new AdapterEmpresa(empresas);
+        recyclerEmpresa.setAdapter(adapterEmpresa);
+
         adapterEmpresa.notifyDataSetChanged();
     }
 
